@@ -121,7 +121,7 @@ IBM_HR_ANALYTICS
 Clone o repositório:
 
 ```bash
-git clone https://github.com/SEU_USUARIO/IBM_HR_ANALYTICS.git
+git clone https://github.com/guimalucas/IBM_HR_ANALYTICS.git
 ```
 
 Instale as dependências:
@@ -140,4 +140,4 @@ Lucas Guimarães
 
 Estudante de Engenharia da Computação – FIAP
 
-GitHub: https://github.com/SEU_USUARIO
+GitHub: https://github.com/guimalucas
