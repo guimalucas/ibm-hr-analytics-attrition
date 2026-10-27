@@ -1,143 +1,42 @@
-# Análise Exploratória de Dados e Testes Estatísticos sobre Rotatividade de Funcionários
+# IBM HR Analytics | Análise de desligamento
 
-## Sobre o projeto
+Investigação exploratória de associações entre características do trabalho e desligamento em uma **base ficcional**. O projeto demonstra limpeza, escolha de denominadores, comparação de grupos, testes estatísticos e tamanhos de efeito. As conclusões se referem somente a estes dados.
 
-A rotatividade de funcionários (Attrition) representa um dos principais desafios enfrentados pelas organizações, impactando custos de recrutamento, treinamento, produtividade e retenção de conhecimento.
+## Resultados principais
 
-O objetivo deste projeto é identificar quais fatores apresentam associação estatisticamente significativa com o desligamento de funcionários por meio de uma Análise Exploratória de Dados (EDA) e da aplicação de testes estatísticos apropriados para diferentes tipos de variáveis.
+São 1.470 registros, dos quais 237 (`16,12%`) têm `Attrition = Yes`.
 
-Todo o processo foi desenvolvido utilizando Python e bibliotecas voltadas para análise de dados e estatística.
+| Comparação | Evidência descritiva | Teste / tamanho do efeito |
+|---|---|---|
+| Horas extras | 30,53% de desligamento com horas extras; 10,44% sem | Qui-quadrado; V de Cramér = 0,244 |
+| Satisfação no trabalho | 22,84% no nível 1; 11,33% no nível 4 | Qui-quadrado; V = 0,109 |
+| Satisfação com o ambiente | 25,35% no nível 1; 13,45% no nível 4 | Qui-quadrado; V = 0,124 |
+| Tempo de empresa | Mediana de 3 anos entre desligados; 6 entre os demais | Mann–Whitney; RBC absoluto = 0,298 |
+| Renda mensal | Mediana de 3.202 entre desligados; 5.204 entre os demais | Mann–Whitney; RBC absoluto = 0,311 |
 
----
+Os cinco testes apresentaram p < 0,001 na amostra, inclusive após o ajuste de Holm para as cinco comparações. Eles foram escolhidos depois de examinar os mesmos dados e **não** controlam fatores como cargo e idade. O ajuste de valores-p não remove esse limite. Associação não indica causa.
 
-## Objetivos
+Para horas extras, a razão entre as taxas observadas é **2,93** (intervalo de 95% aproximado: **2,33 a 3,68**). É uma medida descritiva desta base ficcional, não uma previsão de risco para uma pessoa.
 
-- Realizar a limpeza e preparação dos dados;
-- Explorar o comportamento das variáveis do conjunto de dados;
-- Formular hipóteses sobre possíveis fatores relacionados ao Attrition;
-- Validar as hipóteses utilizando testes estatísticos;
-- Interpretar os resultados sob uma perspectiva de negócio;
-- Apresentar recomendações baseadas nas evidências encontradas.
+## Fonte e execução
 
----
-
-## Dataset
-
-**Origem:** IBM HR Analytics Employee Attrition & Performance
-
-O conjunto de dados contém informações relacionadas ao perfil profissional, características do trabalho e satisfação dos funcionários, permitindo investigar fatores associados à rotatividade.
-
-A variável de interesse analisada neste projeto é:
-
-- **Attrition** (desligamento do funcionário)
-
----
-
-## Tecnologias utilizadas
-
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Seaborn
-- SciPy
-- Statsmodels
-- Jupyter Notebook
-
----
-
-## Etapas do projeto
-
-O projeto foi desenvolvido seguindo as seguintes etapas:
-
-1. Compreensão do problema de negócio;
-2. Importação e inspeção inicial dos dados;
-3. Limpeza e tratamento do dataset;
-4. Análise exploratória dos dados (EDA);
-5. Formulação de hipóteses;
-6. Aplicação de testes estatísticos;
-7. Interpretação dos resultados;
-8. Conclusões e recomendações.
-
----
-
-## Principais análises realizadas
-
-Durante o desenvolvimento do projeto foram investigadas diversas características relacionadas ao desligamento dos funcionários, incluindo:
-
-- Horas extras;
-- Faixa salarial;
-- Tempo de empresa;
-- Satisfação no trabalho;
-- Ambiente de trabalho;
-- Cargo;
-- Departamento;
-- Estado civil;
-- Distância entre residência e trabalho;
-- Escolaridade;
-- Idade;
-- Entre outras variáveis relevantes.
-
----
-
-## Testes estatísticos utilizados
-
-De acordo com o tipo de variável analisada, foram aplicados diferentes testes estatísticos, incluindo:
-
-- Teste Qui-Quadrado;
-- Teste de Mann-Whitney;
-- V de Cramér (tamanho de efeito);
-- Correlação bisserial por postos.
-
-A interpretação dos resultados considera não apenas a significância estatística (valor-p), mas também a magnitude das associações observadas.
-
----
-
-## Principais conclusões
-
-A análise permitiu identificar fatores com associação estatisticamente significativa com o desligamento dos funcionários, possibilitando compreender quais características apresentam maior relação com a rotatividade.
-
-Além da identificação dessas associações, o projeto discute possíveis interpretações dos resultados e apresenta recomendações que podem auxiliar gestores na definição de estratégias voltadas à retenção de talentos.
-
----
-
-## Estrutura do repositório
-
-```
-IBM_HR_ANALYTICS
-│
-├── README.md
-├── LICENSE
-├── requirements.txt
-├── .gitignore
-├── WA_Fn-UseC_-HR-Employee-Attrition.csv
-└── IBM_HR_Analytics.ipynb
-```
-
----
-
-## Como executar
-
-Clone o repositório:
+Fonte: [IBM HR Analytics Employee Attrition & Performance](https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset). A descrição da fonte identifica os dados como **ficcionais**, criados para análise e ensino. Uma cópia do CSV está no repositório para reprodução do notebook.
 
 ```bash
-git clone https://github.com/guimalucas/IBM_HR_ANALYTICS.git
-```
-
-Instale as dependências:
-
-```bash
+git clone https://github.com/guimalucas/ibm-hr-analytics-attrition.git
+cd ibm-hr-analytics-attrition
+python -m venv .venv
+# Ative o ambiente virtual no seu sistema
 pip install -r requirements.txt
+jupyter notebook
 ```
 
-Abra o notebook no Jupyter Notebook ou no Google Colab e execute as células em sequência.
+Abra [`IBM_HR_Analytics.ipynb`](IBM_HR_Analytics.ipynb) a partir da raiz do repositório e execute todas as células. O arquivo é carregado localmente, sem depender de um endereço antigo do GitHub.
 
----
+As faixas de tempo de empresa incluem os valores zero. Antes, os 44 registros com zero anos de empresa ficavam fora de algumas tabelas agrupadas; as proporções foram corrigidas. Os testes de Mann–Whitney usam as variáveis originais, sem agrupamento.
 
-## Autor
+## Limites e próximo passo
 
-Lucas Guimarães
+Esta base não descreve empregados reais. As comparações são bivariadas e podem refletir outros fatores; por isso não servem para estimar o efeito de uma política de RH ou orientar decisões individuais. Um estudo aplicável a uma organização exigiria dados reais coletados com governança adequada, hipóteses definidas previamente, análise multivariada, avaliação de viés e revisão por pessoas da área.
 
-Estudante de Engenharia da Computação – FIAP
-
-GitHub: https://github.com/guimalucas
+**Autor:** Lucas Guimarães · Engenharia da Computação, FIAP
