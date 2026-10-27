@@ -14,7 +14,9 @@ São 1.470 registros, dos quais 237 (`16,12%`) têm `Attrition = Yes`.
 | Tempo de empresa | Mediana de 3 anos entre desligados; 6 entre os demais | Mann–Whitney; RBC absoluto = 0,298 |
 | Renda mensal | Mediana de 3.202 entre desligados; 5.204 entre os demais | Mann–Whitney; RBC absoluto = 0,311 |
 
-Os cinco testes apresentaram p < 0,001 na amostra. Eles foram escolhidos depois de examinar os mesmos dados e **não** foram ajustados por múltiplas comparações ou por fatores como cargo e idade. Associação não indica causa.
+Os cinco testes apresentaram p < 0,001 na amostra, inclusive após o ajuste de Holm para as cinco comparações. Eles foram escolhidos depois de examinar os mesmos dados e **não** controlam fatores como cargo e idade. O ajuste de valores-p não remove esse limite. Associação não indica causa.
+
+Para horas extras, a razão entre as taxas observadas é **2,93** (intervalo de 95% aproximado: **2,33 a 3,68**). É uma medida descritiva desta base ficcional, não uma previsão de risco para uma pessoa.
 
 ## Fonte e execução
 
@@ -31,7 +33,7 @@ jupyter notebook
 
 Abra [`IBM_HR_Analytics.ipynb`](IBM_HR_Analytics.ipynb) a partir da raiz do repositório e execute todas as células. O arquivo é carregado localmente, sem depender de um endereço antigo do GitHub.
 
-As faixas de tempo de empresa e de última promoção incluem os valores zero. Antes, os 44 registros com zero anos de empresa ficavam fora de algumas tabelas agrupadas; as proporções foram corrigidas. Os testes de Mann–Whitney sempre usam a variável original, sem agrupamento.
+As faixas de tempo de empresa incluem os valores zero. Antes, os 44 registros com zero anos de empresa ficavam fora de algumas tabelas agrupadas; as proporções foram corrigidas. Os testes de Mann–Whitney usam as variáveis originais, sem agrupamento.
 
 ## Limites e próximo passo
 
