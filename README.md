@@ -1,6 +1,6 @@
 # IBM HR Analytics | Análise de desligamento
 
-Investigação exploratória de associações entre características do trabalho e desligamento em uma **base ficcional**. O projeto demonstra limpeza, escolha de denominadores, comparação de grupos, testes estatísticos e tamanhos de efeito. As conclusões se referem somente a estes dados.
+Analisei os 1.470 registros **ficcionais** do IBM HR Analytics para comparar taxas de desligamento entre grupos. O [notebook](IBM_HR_Analytics.ipynb) passa pela conferência da base, pelas taxas e testes estatísticos e termina com uma regressão logística ajustada.
 
 ## Resultados principais
 
@@ -14,15 +14,15 @@ São 1.470 registros, dos quais 237 (`16,12%`) têm `Attrition = Yes`.
 | Tempo de empresa | Mediana de 3 anos entre desligados; 6 entre os demais | Mann–Whitney; RBC absoluto = 0,298 |
 | Renda mensal | Mediana de 3.202 entre desligados; 5.204 entre os demais | Mann–Whitney; RBC absoluto = 0,311 |
 
-Os gráficos agora exibem o tamanho de cada grupo e intervalos de Wilson de 95% para as taxas. Os cinco testes apresentaram p < 0,001 na amostra, inclusive após o ajuste de Holm para as cinco comparações. Eles foram escolhidos depois de examinar os mesmos dados e, isoladamente, **não** controlam fatores como cargo e idade. O ajuste de valores-p não remove esse limite. Associação não indica causa.
+Os gráficos mostram o tamanho dos grupos e intervalos de Wilson de 95% para cada taxa. Nos cinco testes, o valor-p ajustado por Holm ficou abaixo de 0,001. Escolhi essas comparações depois de explorar a base; os testes acima analisam uma variável de cada vez, sem controlar cargo ou idade.
 
-Para horas extras, a razão entre as taxas observadas é **2,93** (intervalo de 95% aproximado: **2,33 a 3,68**). É uma medida descritiva desta base ficcional, não uma previsão de risco para uma pessoa.
+Para horas extras, a razão entre as taxas observadas é **2,93** (intervalo de 95% aproximado: **2,33 a 3,68**). Essa conta compara grupos da base e não prevê o desligamento de uma pessoa.
 
-## Análise ajustada exploratória
+## Horas extras no modelo ajustado
 
-O [notebook](IBM_HR_Analytics.ipynb) também ajusta uma regressão logística considerando **idade, tempo de empresa, cargo e satisfação com trabalho e ambiente**. Nesse modelo, a razão de **chances** associada a horas extras é **5,31** (IC de 95%: **3,83 a 7,36**). Razão de chances ajustada e razão de taxas bruta **2,93** são medidas diferentes e não devem ser interpretadas como o mesmo efeito.
+A regressão logística considera **idade, tempo de empresa, cargo e satisfação com trabalho e ambiente**. A razão de **chances** associada a horas extras ficou em **5,31** (IC de 95%: **3,83 a 7,36**). Essa medida ajustada não é a mesma coisa que a razão entre taxas de 2,93 calculada acima.
 
-A especificação foi escolhida após explorar a base; não remove fatores não observados nem permite afirmar que horas extras causem desligamento. O exercício não propõe decidir sobre empregados reais com esses resultados.
+O modelo ajusta apenas as variáveis incluídas. Mesmo com a associação observada, estes dados ficcionais não mostram que horas extras **causem** desligamento.
 
 ## Fonte e execução
 
@@ -37,12 +37,8 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 
-Abra [`IBM_HR_Analytics.ipynb`](IBM_HR_Analytics.ipynb) a partir da raiz do repositório e execute todas as células. O arquivo é carregado localmente, sem depender de um endereço antigo do GitHub.
+Abra [`IBM_HR_Analytics.ipynb`](IBM_HR_Analytics.ipynb) a partir da raiz do repositório e execute as células na ordem. O CSV é lido localmente.
 
-As faixas de tempo de empresa incluem os valores zero. Antes, os 44 registros com zero anos de empresa ficavam fora de algumas tabelas agrupadas; as proporções foram corrigidas. Os testes de Mann–Whitney usam as variáveis originais, sem agrupamento.
-
-## Limites e próximo passo
-
-Esta base não descreve empregados reais. A regressão ajusta apenas as variáveis incluídas e não resolve a seleção posterior das hipóteses nem fatores não medidos. As análises não servem para estimar o efeito de uma política de RH ou orientar decisões individuais. Um estudo aplicável a uma organização exigiria dados reais coletados com governança adequada, hipóteses definidas previamente, avaliação de viés e revisão por pessoas da área.
+As faixas de tempo de empresa incluem os **44 registros com zero anos**. Os testes de Mann–Whitney usam os valores originais de tempo e renda, sem agrupamento.
 
 **Autor:** Lucas Guimarães · Engenharia da Computação, FIAP
