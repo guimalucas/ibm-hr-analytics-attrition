@@ -14,9 +14,15 @@ São 1.470 registros, dos quais 237 (`16,12%`) têm `Attrition = Yes`.
 | Tempo de empresa | Mediana de 3 anos entre desligados; 6 entre os demais | Mann–Whitney; RBC absoluto = 0,298 |
 | Renda mensal | Mediana de 3.202 entre desligados; 5.204 entre os demais | Mann–Whitney; RBC absoluto = 0,311 |
 
-Os cinco testes apresentaram p < 0,001 na amostra, inclusive após o ajuste de Holm para as cinco comparações. Eles foram escolhidos depois de examinar os mesmos dados e **não** controlam fatores como cargo e idade. O ajuste de valores-p não remove esse limite. Associação não indica causa.
+Os gráficos agora exibem o tamanho de cada grupo e intervalos de Wilson de 95% para as taxas. Os cinco testes apresentaram p < 0,001 na amostra, inclusive após o ajuste de Holm para as cinco comparações. Eles foram escolhidos depois de examinar os mesmos dados e, isoladamente, **não** controlam fatores como cargo e idade. O ajuste de valores-p não remove esse limite. Associação não indica causa.
 
 Para horas extras, a razão entre as taxas observadas é **2,93** (intervalo de 95% aproximado: **2,33 a 3,68**). É uma medida descritiva desta base ficcional, não uma previsão de risco para uma pessoa.
+
+## Análise ajustada exploratória
+
+O [notebook](IBM_HR_Analytics.ipynb) também ajusta uma regressão logística considerando **idade, tempo de empresa, cargo e satisfação com trabalho e ambiente**. Nesse modelo, a razão de **chances** associada a horas extras é **5,31** (IC de 95%: **3,83 a 7,36**). Razão de chances ajustada e razão de taxas bruta **2,93** são medidas diferentes e não devem ser interpretadas como o mesmo efeito.
+
+A especificação foi escolhida após explorar a base; não remove fatores não observados nem permite afirmar que horas extras causem desligamento. O exercício não propõe decidir sobre empregados reais com esses resultados.
 
 ## Fonte e execução
 
@@ -37,6 +43,6 @@ As faixas de tempo de empresa incluem os valores zero. Antes, os 44 registros co
 
 ## Limites e próximo passo
 
-Esta base não descreve empregados reais. As comparações são bivariadas e podem refletir outros fatores; por isso não servem para estimar o efeito de uma política de RH ou orientar decisões individuais. Um estudo aplicável a uma organização exigiria dados reais coletados com governança adequada, hipóteses definidas previamente, análise multivariada, avaliação de viés e revisão por pessoas da área.
+Esta base não descreve empregados reais. A regressão ajusta apenas as variáveis incluídas e não resolve a seleção posterior das hipóteses nem fatores não medidos. As análises não servem para estimar o efeito de uma política de RH ou orientar decisões individuais. Um estudo aplicável a uma organização exigiria dados reais coletados com governança adequada, hipóteses definidas previamente, avaliação de viés e revisão por pessoas da área.
 
 **Autor:** Lucas Guimarães · Engenharia da Computação, FIAP
